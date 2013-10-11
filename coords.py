@@ -3,8 +3,8 @@ from __future__ import division
 __all__ = ["xy", "rth"]
 
 from math import sqrt, pi, sin, cos, atan2
-from physics.mathutils import pow_signed
-from physics.angles import asdeg
+from .mathutils import pow_signed
+from .angles import angle
 
 class Coords:
 	def __init__(self, x, y, r, th):
@@ -54,7 +54,7 @@ class CoordsRTh(Coords):
 
 
 def xy(x,y):
-	return CoordsXY(x, y, sqrt(x*x+y*y), asdeg(atan2(y, x)))
+	return CoordsXY(x, y, sqrt(x*x+y*y), angle(atan2(y, x)))
 
 def rth(r, th):
 	return CoordsRTh(r*cos(th), r*sin(th), r, th)

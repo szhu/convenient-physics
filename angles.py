@@ -13,6 +13,7 @@ class Angle(float): pass
 def angle(th):
 	return mode(th)
 
+
 class Rad(Angle):
 	def __str__(self): return '%.4f' % self
 	def __repr__(self): return str(self)
@@ -24,6 +25,7 @@ class Rad(Angle):
 
 def rad(th): return Rad(th)
 def asrad(th): return Rad(th)
+RAD = asrad
 
 
 class Deg(Angle):
@@ -37,5 +39,7 @@ class Deg(Angle):
 
 def deg(th): return Deg(torad(th))
 def asdeg(th): return Deg(th)
+DEG = asdeg
 
-mode = asdeg
+
+mode = DEG

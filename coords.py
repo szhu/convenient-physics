@@ -5,13 +5,14 @@ __all__ = ["xy", "rth"]
 from math import sqrt, pi, sin, cos, atan2
 from .mathutils import pow_signed
 from .angles import angle
+from .mathutils import roundoff_error
 
 class Coords:
 	def __init__(self, x, y, r, th):
-		self.x = x
-		self.y = y
-		self.r = r
-		self.th = ((th+pi) % (2*pi))-pi
+		self.x = roundoff_error(x)
+		self.y = roundoff_error(y)
+		self.r = roundoff_error(r)
+		self.th = roundoff_error( ((th+pi) % (2*pi))-pi )
 	def __neg__(self): return self * -1
 	def __sub__(self, other): return self + -other
 	def __truediv__(self, a): return self * (1/a)

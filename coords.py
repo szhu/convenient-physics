@@ -4,7 +4,7 @@ __all__ = ["xy", "rth"]
 
 from math import sqrt, pi, sin, cos, atan2
 from .mathutils import pow_signed
-from .angles import angle
+from .angles import angle, fromrad
 from .mathutils import roundoff_error
 
 class Coords:
@@ -12,7 +12,7 @@ class Coords:
 		self.x = roundoff_error(x)
 		self.y = roundoff_error(y)
 		self.r = roundoff_error(r)
-		self.th = roundoff_error( ((th+pi) % (2*pi))-pi )
+		self.th = ((th+pi) % (2*pi))-pi
 	def __neg__(self): return self * -1
 	def __sub__(self, other): return self + -other
 	def __truediv__(self, a): return self * (1/a)
@@ -55,9 +55,10 @@ class CoordsRTh(Coords):
 
 
 def xy(x,y):
-	return CoordsXY(x, y, sqrt(x*x+y*y), angle(atan2(y, x)))
+	return CoordsXY(x, y, sqrt(x*x+y*y), fromrad(atan2(y, x)))
 
 def rth(r, th):
+	# th = angle(th)
 	return CoordsRTh(r*cos(th), r*sin(th), r, th)
 
 def _test():

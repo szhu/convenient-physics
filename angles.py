@@ -1,7 +1,7 @@
 from __future__ import division
 from math import pi
 
-__all__ = ['angle', 'todeg', 'torad', 'deg', 'rad']
+__all__ = ['fromrad', 'angle', 'todeg', 'torad', 'deg', 'rad']
 
 def todeg(th):
 	return th * 180 / pi
@@ -10,8 +10,11 @@ def torad(th):
 
 class Angle(float): pass
 
+def fromrad(th):
+	return mode.fromrad(th)
+
 def angle(th):
-	return mode(th)
+	return mode.interpret(th)
 
 
 class Rad(Angle):
@@ -22,10 +25,14 @@ class Rad(Angle):
 	def __mul__(*args): return Rad(float.__mul__(*args))
 	def __div__(*args): return Rad(float.__div__(*args))
 	def __mod__(*args): return Rad(float.__mod__(*args))
+	@staticmethod
+	def fromrad(th): return asrad(th)
+	@staticmethod
+	def interpret(th): return rad(th)
 
 def rad(th): return Rad(th)
 def asrad(th): return Rad(th)
-RAD = asrad
+RAD = Rad
 
 
 class Deg(Angle):
@@ -36,10 +43,14 @@ class Deg(Angle):
 	def __mul__(*args): return Deg(float.__mul__(*args))
 	def __div__(*args): return Deg(float.__div__(*args))
 	def __mod__(*args): return Deg(float.__mod__(*args))
+	@staticmethod
+	def fromrad(th): return asdeg(th)
+	@staticmethod
+	def interpret(th): return deg(th)
 
 def deg(th): return Deg(torad(th))
 def asdeg(th): return Deg(th)
-DEG = asdeg
+DEG = Deg
 
 
 mode = DEG

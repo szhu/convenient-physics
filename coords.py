@@ -4,7 +4,7 @@ __all__ = ["xy", "rth"]
 
 from math import sqrt, pi, sin, cos, atan2
 from .mathutils import pow_signed
-from .angles import angle, fromrad
+from .angles import angle, asangle
 from .mathutils import roundoff_error
 
 class Coords:
@@ -55,10 +55,10 @@ class CoordsRTh(Coords):
 
 
 def xy(x,y):
-	return CoordsXY(x, y, sqrt(x*x+y*y), fromrad(atan2(y, x)))
+	return CoordsXY(x, y, sqrt(x*x+y*y), asangle(atan2(y, x)))
 
 def rth(r, th):
-	# th = angle(th)
+	th = angle(th)
 	return CoordsRTh(r*cos(th), r*sin(th), r, th)
 
 def _test():

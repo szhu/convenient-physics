@@ -5,8 +5,9 @@ from .coords import *
 from .constants import *
 from .probability import *
 
-__all__ = filter(
-	lambda name:
-		not name.startswith('_') and
-		not name in ('mathutils', 'angles', 'coords', 'constants', 'probability'),
-	locals().keys())
+__all__ = list(
+	filter(
+		lambda name: not name.startswith('_') and not name in ('mathutils', 'angles', 'coords', 'constants', 'probability'),
+		list( locals().keys() )
+	)
+)

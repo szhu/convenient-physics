@@ -21,3 +21,6 @@ mmHg = 133.322368
 
 # Temperature
 degC = 273
+
+# Complex numbers
+i = j = 1j
